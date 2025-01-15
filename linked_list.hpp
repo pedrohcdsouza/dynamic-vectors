@@ -43,7 +43,21 @@ public:
     }
     int get_at(unsigned int index) {}
     void clear() {}
-    void push_back(int value) {}
+    void push_back(int value) {
+        int_node* new_node = new int_node;
+        new_node->value = value;
+        new_node->next = nullptr;
+        new_node->prev = nullptr;
+
+        if (head == nullptr){
+            head = tail = new_node;
+        }else{
+            new_node->prev = tail;
+            tail->next = new_node;
+            tail = new_node;
+        }
+        
+    }
     void push_front(int value) {
         int_node* new_node = new int_node;
         new_node->value = value;
