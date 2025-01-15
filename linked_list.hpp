@@ -70,9 +70,32 @@ void push_front(int value) { // Adiciona um elemento no ``início'' do vetor
 }
 
 bool pop_back() { // Remove um elemento do ``final'' do vetor
-
+    if(size_ == 0) {
+        return false;
+    }else if(tail == head){
+        tail == nullptr;
+        head == nullptr;
+    }else{
+        tail->prev = tail;
+        tail->next = nullptr;
+    }
+    size_ -= 1;
+    return true;
 }
-bool pop_front() {} // Remove um elemento do ``início'' do vetor
+
+bool pop_front() { // Remove um elemento do ``início'' do vetor
+    if(size_ == 0){
+        return false;
+    }else if(tail == head){
+        tail = nullptr;
+        head == nullptr;
+    }else{
+        head->next = head;
+        head->prev = nullptr;
+    }
+    size_ -= 1;
+    return true;
+}
 
 int back(){ // Retorna o elemento do ``final'' do vetor
     return tail->current;
