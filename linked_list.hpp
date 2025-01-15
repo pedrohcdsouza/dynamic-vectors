@@ -12,8 +12,8 @@ private:
     unsigned int size_;
 public:
     linked_list() {
-        this->head = 0;
-        this->tail = 0;
+        this->head = nullptr;
+        this->tail = nullptr;
         this->size_ = 0;
     }
     ~linked_list() {
@@ -24,13 +24,13 @@ public:
             delete to_remove;
         }
     }
-    unsigned int size() {}
-    unsigned int capacitty() {}
-    double percent_occupied() {}
+    unsigned int size() { // Return the array size.
+        return size_;
+    }
     bool insert_at(unsigned int index, int value) {}
     bool remove_at(unsigned int index) {
         if (index >= this->size_)
-            return false; // Não removeu
+            return false;
         int_node* to_remove = this->head;
         for (unsigned int i = 0; i < index; ++i)
             to_remove = to_remove->next;
