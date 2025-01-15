@@ -9,19 +9,31 @@ int_node* next, * prev;
 int_node* head, * tail;
 unsigned int size_;
 public:
-linked_list() {}
-~linked_list() {}
-unsigned int size() {} // Retorna a quantidade de elementos armazenados
-unsigned int capacity() {} // Retorna o espaço reservado para armazenar os elementos
-double percent_occupied() {} // Retorna um valor entre 0.0 a 1.0 com o percentual da
+linked_list() { // Construtor
+    this->head = nullptr;
+    this->tail = nullptr;
+    this->size_ = 0;
+}
 
-// memória usada.
+~linked_list() { // Destrutor
+
+}
+
+unsigned int size() { // Retorna a quantidade de elementos armazenados
+    return size_;
+}
+
+double percent_occupied() {  // Retorna um valor entre 0.0 a 1.0 com o percentual da memória usada.
+    if (size_ > 0){
+        return 1.0;
+    }else{
+        return 0.0;
+    }
+}
 
 bool insert_at(unsigned int index, int value) {} // Insere elemento no índice index
 bool remove_at(unsigned int index) {} // Remove elemento do índice index
-int get_at(unsigned int index) {} // Retorna elemento no índice index,
-
-// −1 se índice inválido
+int get_at(unsigned int index) {} // Retorna elemento no índice index, −1 se índice inválido
 
 void clear() {} // Remove todos os elementos, deixando o vetor no estado inicial
 void push_back(int value) {} // Adiciona um elemento no ``final'' do vetor
