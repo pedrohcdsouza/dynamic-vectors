@@ -69,10 +69,19 @@ void push_front(int value) { // Adiciona um elemento no ``início'' do vetor
     size_ += 1;
 }
 
-bool pop_back() {} // Remove um elemento do ``final'' do vetor
+bool pop_back() { // Remove um elemento do ``final'' do vetor
+
+}
 bool pop_front() {} // Remove um elemento do ``início'' do vetor
-int back(){} // Retorna o elemento do ``final'' do vetor
-int front(){} // Retorna o elemento do ``início'' do vetor
+
+int back(){ // Retorna o elemento do ``final'' do vetor
+    return tail->current;
+}
+
+int front(){ // Retorna o elemento do ``início'' do vetor
+    return head->current;
+}
+
 bool remove(int value) {} // Remove value do vetor caso esteja presente
 int find(int value) {} // Retorna o índice de value, −1 caso value não esteja presente
 int count(int value) {} // Retorna quantas vezes value occorre no vetor
