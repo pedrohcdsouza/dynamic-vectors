@@ -31,9 +31,41 @@ double percent_occupied() {  // Retorna um valor entre 0.0 a 1.0 com o percentua
     }
 }
 
-bool insert_at(unsigned int index, int value) {} // Insere elemento no índice index
+bool insert_at(unsigned int index, int value) { // Insere elemento no índice index
+    if(index > size_){
+        return false;
+    }
+
+    int_node *new_node = new int_node;
+    new_node->current = value;
+
+    if(index == 0){
+        new_node->next = head;
+        new_node->prev = nullptr;
+        if(head){
+            head->prev = new_node;
+        }
+        head = new_node;
+        if(size_ == 0){
+            tail = new_node;
+        }
+    }else if(index == size_){
+        int_node* current = head;
+        for(unsigned int i = 0; i < index -1; i++){
+            current = current->next;
+        }
+        new_node->next = current ->next;
+        new_node->prev = current;
+        if(current->next){
+            current->next = new_node;
+        }
+        size_ += 1;
+        return true;   
+    }
+}
+
 bool remove_at(unsigned int index) {} // Remove elemento do índice index
-int get_at(unsigned int index) {} // Retorna elemento no índice index, −1 se índice inválido
+int get_at(unsigned int index) {} // Retorna elemento no 'índice' index, −1 se índice inválido
 
 void clear() {} // Remove todos os elementos, deixando o vetor no estado inicial
 
