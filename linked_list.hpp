@@ -68,8 +68,8 @@ bool remove_at(unsigned int index) {} // Remove elemento do índice index
 int get_at(unsigned int index) {} // Retorna elemento no 'índice' index, −1 se índice inválido
 
 void clear() {
+    int_node* del_node = head;
     while (head != nullptr) { // Remove todos os elementos, deixando o vetor no estado inicial
-        int_node* del_node = head;
         head = head->next;
         delete del_node;
     }
