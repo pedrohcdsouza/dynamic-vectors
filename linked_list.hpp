@@ -16,7 +16,7 @@ linked_list() { // Construtor
 }
 
 ~linked_list() { // Destrutor
-
+    clear();
 }
 
 unsigned int size() { // Retorna a quantidade de elementos armazenados
@@ -67,7 +67,15 @@ bool insert_at(unsigned int index, int value) { // Insere elemento no índice in
 bool remove_at(unsigned int index) {} // Remove elemento do índice index
 int get_at(unsigned int index) {} // Retorna elemento no 'índice' index, −1 se índice inválido
 
-void clear() {} // Remove todos os elementos, deixando o vetor no estado inicial
+void clear() {
+    while (head != nullptr) { // Remove todos os elementos, deixando o vetor no estado inicial
+        int_node* del_node = head;
+        head = head->next;
+        delete del_node;
+    }
+    tail = nullptr;
+    size_ = 0;
+} 
 
 void push_back(int value) { // Adiciona um elemento no ``final'' do vetor
     int_node *new_node = new int_node;
@@ -137,7 +145,40 @@ int front(){ // Retorna o elemento do ``início'' do vetor
     return head->current;
 }
 
-bool remove(int value) {} // Remove value do vetor caso esteja presente
+bool remove(int value) { // Remove value do vetor caso esteja presente
+
+    int_node* del_node = head;
+
+    if(size_ == 0){
+        return false;
+    }
+
+    if(size_ == 1 && del_node->current == value){
+        tail = nullptr;
+        head = nullptr;
+        size_ = 0;
+        delete del_node;
+        return true;
+    }
+
+    for(int i = 0; i < size_ -1; i++){
+        if(del_node->current == value){
+            del_node->prev->next = del_node->next;
+            del_node->next->prev = del_node->prev;
+            size --;            
+        }
+        del_node = del_node->next;
+    }
+
+    if(tail->next == nullptr){
+        tail = tail->prev;
+        tail->prev->next = nullptr;
+    }
+
+    delete del_node;
+    return true;
+
+} 
 int find(int value) {} // Retorna o índice de value, −1 caso value não esteja presente
 int count(int value) {} // Retorna quantas vezes value occorre no vetor
 int sum() {} // Retorna a soma dos elementos do vetor
