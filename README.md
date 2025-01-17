@@ -20,7 +20,7 @@
 
 <h3><strong><em>Métodos</em></strong></h3>
 <ul>
-  <li>Construtor</li>
+  <li>Constructor</li>
 </ul>
 
 <table>
@@ -49,7 +49,7 @@ linked_list() {
 </table>
 
 <ul>
-  <li>Destrutor</li>
+  <li>Destructor</li>
 </ul>
 
 <table>
@@ -72,7 +72,66 @@ linked_list() {
     }
   tail = nullptr;
   size_ = 0;
-} 
+}
 </pre></td>
   </tr>
+  <tr>
+    <td>O destrutor apenas apaga a lista e reseta todas as variáveis.</td>
+    <td>O destrutor percorre do primeiro elemento (HEAD) até o último elemento (TAIL) e apaga todo encandeamento.</td>
+  </tr>
+</table>
+
+<ul>
+  <li>Increase_capacity</li>
+</ul>
+
+<table>
+  <tr>
+<td><pre>
+void increase_capacity() {
+  capacity_ *= 2;
+  int *new_node = new int[capacity_];
+    for (unsigned int i = 0; i < size_; ++i) {
+      new_node[i] = data[i];
+      }
+  data = new_node;                                            
+}       
+</pre></td>
+<td><pre>
+                     .                                        
+</pre></td>
+  </tr>
+  <tr>
+    <td>O método consiste na criação de uma nova lista, quando a anterior está cheia, com maior capacidade.</td>
+    <td>Não precisa de aumentar a capacidade tendo em vista que seus elementos são alocados dinâmicamente, separados na memória.</td>
+  </tr>
+</table>
+
+<ul><li>Size</li></ul>
+
+<table>
+  <tr>
+<td><pre>
+unsigned int size() {
+  return size_;                                                                                                             .        
+}
+</pre></td>
+  </tr>
+  <tr><td>Retorna o tamanho da lista, armazenado dentro da classe/struct.</td></tr>
+</table>
+
+<ul><li>Capacity</li></ul>
+
+<table>
+  <tr>
+<td><pre>
+unsigned int capacity() {
+  return capacity_;                                           
+}
+</pre></td>
+<td><pre>
+                                                             .
+</pre></td>
+  </tr>
+  <tr><td>Retorna a atual capacidade da lista</td><td>Não há necessidade de capacidade.</td></tr>
 </table>
