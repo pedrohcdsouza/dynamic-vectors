@@ -13,7 +13,6 @@ void increase_capacity() {
         new_node[i] = data[i];
     }
 
-    delete[] data;
     data = new_node;
 }
 public:
