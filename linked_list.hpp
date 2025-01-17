@@ -31,38 +31,47 @@ double percent_occupied() {  // Retorna um valor entre 0.0 a 1.0 com o percentua
     }
 }
 
-bool insert_at(unsigned int index, int value) { // Insere elemento no índice index
-    if(index > size_){
-        return false;
+bool insert_at(unsigned int index, int value){
+
+    if (index > size_ || index < 0){
+        return false; 
     }
 
     int_node *new_node = new int_node;
     new_node->current = value;
+    new_node->next = nullptr;
+    new_node->prev = nullptr;
 
-    if(index == 0){
-        new_node->next = head;
-        new_node->prev = nullptr;
-        if(head){
+    if (index == 0){
+
+        if (head == nullptr){
+            head = tail = new_node;
+        }else{
+            new_node->next = head;
             head->prev = new_node;
+            head = new_node;
         }
-        head = new_node;
-        if(size_ == 0){
-            tail = new_node;
-        }
-    }else if(index == size_){
-        int_node* current = head;
-        for(unsigned int i = 0; i < index -1; i++){
+    }else if (index == size_){
+        new_node->prev = tail;
+        tail->next = new_node;
+        tail = new_node;
+    }
+    else{
+        int_node *current = head;
+        for (unsigned int i = 0; i < index; i++){
             current = current->next;
         }
-        new_node->next = current ->next;
-        new_node->prev = current;
-        if(current->next){
-            current->next = new_node;
-        }
-        size_ += 1;
-        return true;   
+
+        new_node->prev = current->prev;
+        new_node->next = current;
+        current->prev->next = new_node;
+        current->prev = new_node;
     }
+
+    size_++;
+    return true;
 }
+
 
 bool remove_at(unsigned int index) { // Remove elemento do índice index
     
