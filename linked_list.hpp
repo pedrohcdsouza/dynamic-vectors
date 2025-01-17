@@ -64,8 +64,73 @@ bool insert_at(unsigned int index, int value) { // Insere elemento no índice in
     }
 }
 
-bool remove_at(unsigned int index) {} // Remove elemento do índice index
-int get_at(unsigned int index) {} // Retorna elemento no 'índice' index, −1 se índice inválido
+bool remove_at(unsigned int index) { // Remove elemento do índice index
+    
+        if (index >= size_ || index < 0)
+        {
+            return false; 
+        }
+
+        int_node *to_delete = nullptr;
+
+        if (index == 0)
+        {
+
+            to_delete = head;
+            head = head->next;
+            if (head != nullptr)
+            {
+                head->prev = nullptr;
+            }
+            else
+            {
+
+                tail = nullptr;
+            }
+        }
+        else if (index == size_ - 1)
+        {
+
+            to_delete = tail;
+            tail = tail->prev;
+            if (tail != nullptr)
+            {
+                tail->next = nullptr;
+            }
+            else
+            {
+
+                head = nullptr;
+            }
+        }
+        else
+        {
+            int_node *current = head;
+            for (unsigned int i = 0; i < index; i++)
+            {
+                current = current->next;
+            }
+            to_delete = current;
+            current->prev->next = current->next;
+            current->next->prev = current->prev;
+        }
+
+        delete to_delete;
+
+        size_--;
+        return true;
+    
+}
+
+int get_at(unsigned int index) { // Retorna elemento no 'índice' index, −1 se índice inválido
+    int_node* node = head;
+    if(size_ > index)
+        return -1;
+    for(int i = 0; i < size_; i++){
+        node = node->next;
+    }
+    return node->current;
+}
 
 void clear() {
     int_node* del_node = head;
@@ -165,7 +230,7 @@ bool remove(int value) { // Remove value do vetor caso esteja presente
         if(del_node->current == value){
             del_node->prev->next = del_node->next;
             del_node->next->prev = del_node->prev;
-            size --;            
+            size_ -= 1;            
         }
         del_node = del_node->next;
     }
@@ -179,8 +244,38 @@ bool remove(int value) { // Remove value do vetor caso esteja presente
     return true;
 
 } 
-int find(int value) {} // Retorna o índice de value, −1 caso value não esteja presente
-int count(int value) {} // Retorna quantas vezes value occorre no vetor
-int sum() {} // Retorna a soma dos elementos do vetor
+int find(int value) { // Retorna o índice de value, −1 caso value não esteja presente
+    int pos = 0;
+    int loop = size_ -1;
+    int_node* node = head;
+    while(loop > 0){
+        if(node->current == value){
+            return pos;
+        }
+        node = node->next;
+        pos += 1;
+        loop -= 1;
+    }
+    return -1;
+}
+int count(int value) { // Retorna quantas vezes value ocorre no vetor
+    int count = 0;
+    int_node* node = head;
+    for(int i = 0; i < size_ -1; i++){
+        if(node->current == value){
+            count += 1;
+        }
+        node = node->next;   
+    }
+} 
+int sum() { // Retorna a soma dos elementos do vetor
+    int sum = 0;
+    int_node* node = head;
+    for(int i = 0; i < size_ -1; i++){
+        sum += node->current;
+        node = node->next;
+    }
+    return sum;
+} 
 };
 #endif // __LINKED_LIST_IFRN__
