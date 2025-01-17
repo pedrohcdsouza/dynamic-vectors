@@ -135,3 +135,81 @@ unsigned int capacity() {
   </tr>
   <tr><td>Retorna a atual capacidade da lista</td><td>Não há necessidade de capacidade.</td></tr>
 </table>
+
+<ul><li>Insert_at</li></ul>
+
+<table>
+  <tr>
+<td><pre>
+bool insert_at(unsigned int index, int value){
+  if (index > size_ || index < 0){
+      return false; 
+  }
+  int_node *new_node = new int_node;
+  new_node->current = value;
+  new_node->next = nullptr;
+  new_node->prev = nullptr;
+  if (index == 0){
+      if (head == nullptr){
+          head = tail = new_node;
+      }else{
+          new_node->next = head;
+          head->prev = new_node;
+          head = new_node;
+      }
+  }else if (index == size_){
+      new_node->prev = tail;
+      tail->next = new_node;
+      tail = new_node;
+  }
+  else{
+      int_node *current = head;
+      for (unsigned int i = 0; i < index; i++){
+          current = current->next;
+      }
+      new_node->prev = current->prev;
+      new_node->next = current;
+      current->prev->next = new_node;
+      current->prev = new_node;
+  }
+  
+  size_++;
+  return true;                                                 .                        
+}
+</pre></td>
+
+<td><pre>
+bool insert_at(unsigned int index, int value) {
+  if (index > size_ or index < 0){
+        return false;
+    }
+
+  if (size_ == capacity_){
+        increase_capacity();
+    }
+
+  for (unsigned int i = size_; i > index; i--)
+    {
+        data[i] = data[i - 1];
+    }
+
+  data[index] = value;
+
+  size_++;
+
+  return true;                                                  .
+}
+</pre></td>
+  </tr>
+
+<tr>
+  <td>O método insert_at insere um nó em uma lista duplamente encadeada na posição indicada. Ele verifica a validade do índice, cria o nó e ajusta os ponteiros dos nós adjacentes conforme a posição (início, meio ou fim). O tamanho da lista é incrementado após a inserção.</td>
+  <td>
+O método insert_at insere um valor no vetor na posição especificada, movendo os elementos à direita para abrir espaço. Se necessário, aumenta a capacidade do vetor. O tamanho é incrementado após a inserção.</td>
+</tr>
+<tr>
+  <td>Complexidade: O tempo de execução é O(n), pois no pior caso é necessário percorrer a lista até o índice desejado, onde n é o número de elementos na lista.</td>
+  <td>Complexidade: O tempo de execução é O(n), onde n é o número de elementos no vetor, pois no pior caso, todos os elementos após o índice especificado precisam ser movidos uma posição à direita.</td>
+</tr>
+<tr></tr>
+</table>
